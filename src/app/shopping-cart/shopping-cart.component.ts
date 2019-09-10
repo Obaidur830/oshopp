@@ -13,7 +13,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
     this.cart$ = this.shoppingCartService.getCart();
   }
-  clearCart(){
+  clearCart() {
     this.shoppingCartService.clearCart();
   }
 
