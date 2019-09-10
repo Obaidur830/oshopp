@@ -20,7 +20,7 @@ export class ShoppingCartService {
     //console.log(this.db.object('/shopping-carts/' + cartId));
     return this.db.object('/shopping-carts/' + cartId).valueChanges()
       .map(( x: ShoppingCart) => {
-       // console.log(x);
+        console.log(x);
         return new ShoppingCart(x.items);
       });
   }
