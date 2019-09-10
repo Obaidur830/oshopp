@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Product } from './models/products';
 import 'rxjs/add/operator/take';
 import { Item } from './models/Item';
@@ -18,10 +18,20 @@ export class ShoppingCartService {
     const cartId = this.getOrCreateCartId();
     // tslint:disable-next-line: comment-format
     //console.log(this.db.object('/shopping-carts/' + cartId));
-    return this.db.object('/shopping-carts/' + cartId).valueChanges()
-      .map(( x: ShoppingCart) => {
-        console.log(x);
-        return new ShoppingCart(x.items);
+    return this.db.object('/shopping-carts/' + cartId ).valueChanges()
+      .map( (x: {dateCreated: Date, items: {[key: string]: Item}}) => {
+         //{[key: string]: Item}
+      //  const y = Object.keys(x || {}).reduce((result, key) => {
+      //     result[key] = {
+      //         title: x[key].title,
+      //         price: x[key].price,
+      //         imageUrl: x[key].imageUrl,
+      //         quantity: x[key].quantity
+      //     };
+      //     return result;
+      //     }, {});
+      // console.log(x.dateCreated);
+       return new ShoppingCart(x.items);
       });
   }
   addToCart(product: Product ) {
