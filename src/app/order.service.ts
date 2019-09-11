@@ -30,8 +30,8 @@ export class OrderService {
    getOrdersByUser(userId: string): Observable<PlacedOrders> {
     return this.db.list('/orders',
        ref => ref.orderByChild('userId').equalTo(userId)).valueChanges()
-        .map((x: [{ datePlaced: Date, shipping: {}, items: [{product: PlacedOrderItemProduct, quantity: number, totalPrice: number}], 
-          userId: string}]) => {
+        .map((x: [{ datePlaced: Date, shipping: {}, items: [{product: PlacedOrderItemProduct, quantity: number, totalPrice: number}],
+           userId: string }]) => {
           return new PlacedOrders(x);
         });
   }

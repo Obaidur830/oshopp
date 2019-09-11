@@ -1,6 +1,6 @@
 import { PlacedOrderItemProduct } from './placedOrderItemproduct';
 
-export class PlacedOrderItem{
+export class PlacedOrderItem {
     product: PlacedOrderItemProduct;
     quantity: number;
     totalPrice: number;

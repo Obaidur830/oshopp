@@ -1,19 +1,49 @@
-<h1>Orders</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Customer</th>
-      <th>Date</th>
-      <th></th>
-    </tr>
-  </thead> 
-  <tbody>
-    <tr *ngFor="let order of orders$ | async">
-      <td>{{ order.shipping.name }}</td>
-      <td>{{ order.datePlaced | date}}</td>
-      <td>
-        <a href="#">View</a>
-      </td>
-    </tr>
-  </tbody> 
-</table>
+<h2>Shipping</h2>
+<div class="row">
+
+  <div class="col-md-6">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders.allOrders">
+          <td>{{ order.shipping.name }}</td>
+          <td>{{ order.datePlaced | date}}</td>
+          <td 
+          (click)="showItemsSummary(order)" >
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6" *ngIf="currentViewOrder">
+    <div class="card">
+
+      <div class="card-body">
+          <h5 class="card-title">Order Summary </h5>
+
+          <ul class="list-group list-group-flush">
+              <li *ngFor="let item of currentViewOrder.items" class="list-group-item">
+                  {{item.quantity}} x {{item.product.title}}
+                  <div class="float-right">
+                      {{item.totalPrice | currency:'USD':true}}
+                  </div>
+              </li>
+              <li class="list-group-item font-weight-bold">
+                  Total
+                  <div class="float-right">
+                      {{currentViewOrder.getTotalPrice() | currency:'USD':true }}
+                  </div>
+              </li>
+          </ul>
+      </div>
+  </div>
+  </div>
+</div>
