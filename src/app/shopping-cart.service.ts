@@ -20,17 +20,6 @@ export class ShoppingCartService {
     //console.log(this.db.object('/shopping-carts/' + cartId));
     return this.db.object('/shopping-carts/' + cartId ).valueChanges()
       .map( (x: {dateCreated: Date, items: {[key: string]: Item}}) => {
-         //{[key: string]: Item}
-      //  const y = Object.keys(x || {}).reduce((result, key) => {
-      //     result[key] = {
-      //         title: x[key].title,
-      //         price: x[key].price,
-      //         imageUrl: x[key].imageUrl,
-      //         quantity: x[key].quantity
-      //     };
-      //     return result;
-      //     }, {});
-      // console.log(x.dateCreated);
        return new ShoppingCart(x.items);
       });
   }
@@ -66,7 +55,7 @@ export class ShoppingCartService {
   updateItem(product, change: number) {
     const cartId = this.getOrCreateCartId();
 
-    const item$ = this.getItem(cartId, product.key);  // this.db.object('/shopping-carts/' + cartId + '/items/' + product.key);
+    const item$ = this.getItem(cartId, product.key);
     item$.valueChanges().take(1).subscribe((item: Item) => {
        //let quantity = (item.quantity || 0) + change;
        if (item && item.quantity + change === 0) {item$.remove(); } else {

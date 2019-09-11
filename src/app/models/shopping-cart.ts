@@ -4,16 +4,16 @@ import { Product } from './products';
 export class ShoppingCart {
      items: Item[] = [];
      constructor(public itemsMap: {[productId: string]: Item}) {
-      this.itemsMap = itemsMap || {};
+       this.itemsMap = itemsMap || {};
      // console.log(this.itemsMap);
          // tslint:disable-next-line: forin
-      for (const productId in itemsMap) {
+       for (const productId in itemsMap) {
            const item = itemsMap[productId];
           //  const x = new Item();
           //  Object.assign(x, item);
           //  x.key = productId;
            this.items.push(new Item({ ...item, key: productId }));
-         }
+        }
      }
 
     //  get productIds() {
